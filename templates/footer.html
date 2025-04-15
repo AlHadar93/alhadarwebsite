@@ -1,0 +1,55 @@
+<!-- footer section -->
+<section class="footer-container">
+    <footer class="footer-section py-4">
+        <div class="container">
+            <div class="row text-center text-md-start align-items-center">
+
+                <!-- Left Section (Logo and Copyright) -->
+                <div class="col-md-4 d-flex flex-column align-items-center align-items-md-start mb-3 mb-md-0">
+                    <span class="text-muted" id="footer-text">© YOUR NAME GOES HERE {{ copyright_year }} </span>
+                </div>
+
+                <!-- Center Section (Legal Links) -->
+                <div class="col-md-4 d-flex justify-content-center mb-3 mb-md-0">
+                    <ul class="list-inline text-center">
+                        <li class="list-inline-item mx-2">
+                            <a href="{{ url_for('disclaimer') }}" class="text-decoration-none text-muted">Disclaimer</a>
+                        </li>
+                        <li class="list-inline-item mx-2">
+                            <a href="{{ url_for('privacy_policy') }}" class="text-decoration-none text-muted">Privacy Policy</a>
+                        </li>
+                        <li class="list-inline-item mx-2">
+                            <a href="{{ url_for('terms_and_conditions') }}" class="text-decoration-none text-muted">Terms and Conditions</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right Section (Social Links) -->
+                <div class="col-md-4 d-flex justify-content-center justify-content-md-end">
+                    <ul class="list-unstyled d-flex">
+                        <li class="ms-3">
+                            <a href="YOUR GITHUB LINK" class="text-decoration-none">
+                                <img src="/static/img/githubdark.svg" alt="GitHub" class="social-icon github" width="30" height="30">
+                            </a>
+                        </li>
+                        <li class="ms-3">
+                            <a href="YOUR LINKEDIN LINK" class="text-decoration-none">
+                                <img src="/static/img/linkedindark.svg" alt="LinkedIn" class="social-icon lin" width="30" height="30">
+                            </a>
+                        </li>
+                        <li class="ms-3">
+                            <a href="YOUR INSTAGRAM LINK" class="text-decoration-none">
+                                <img src="/static/img/instagramdark.svg" alt="Instagram" class="social-icon ins" width="30" height="30">
+                            </a>
+                        </li>
+                        <li class="ms-3">
+                            <a href="YOUR FACEBOOK LINK" class="text-decoration-none">
+                                <img src="/static/img/facebookdark.svg" alt="Facebook" class="social-icon fac" width="30" height="30">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</section>

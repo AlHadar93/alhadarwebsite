@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+
+<header class="masthead" style="background-image: url('{{ post.img_url }}')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>{{ post.title }}</h1>
+                    <span class="meta">
+                        Posted by <a href="{{ url_for('about') }}">{{ post.author.name }}</a>
+                        on {{ post.date }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5" id="post-text">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div>
+                    {{ post.body|safe }}
+                    {% if current_user.id == 1 %}
+                    <div class="d-flex justify-content-end mb-4">
+                        <a class="btn btn-primary float-right" href="{{ url_for('edit_post', post_id=post.id) }}">Edit Post</a>
+                    </div>
+                    {% endif %}
+                </div>
+                <p class="text-muted">Category: {{ post.category }}</p>
+
+                <!--like counter-->
+                <div class="post-likes-views mt-3">
+                    <p><strong>{{ post.views }} </strong><img class="eye" src="/static/img/eyedark.svg" alt="eye svg"/></p>
+                    <button class="like-button btn btn-outline-primary mb-3"
+                            data-post-id="{{ post.id }}"
+                            data-category="{{ post.category.replace(' ', '-') }}"
+                            type="button">
+                        Like
+                    </button>
+                    <p id="like-count-{{ post.id }}">
+                        <strong>{{ post.likes }} </strong>
+                        <img class="thumb" src="/static/img/thumbsupdark.svg" alt="thumbs up svg"/>
+                    </p>
+                </div>
+
+                <!-- Comment Form -->
+                <form action="{{ url_for('show_post', category=post.category.replace(' ', '-'), post_id=post.id) }}" method="post">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                        <label for="{{ form.comment.id }}" class="form-label">{{ form.comment.label }}</label>
+                        {{ form.comment(class="form-control") }}
+                        {% for error in form.comment.errors %}
+                            <span class="error text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+
+                <!-- Comments Section -->
+                <div class="comments-section mt-5">
+                    <h3>Comments</h3>
+                    {% from 'comment.html' import render_comment %}
+                    <ul class="commentList">
+                        {% for comment in post.comments %}
+                            {% if not comment.parent_id %}
+                                {{ render_comment(comment, post, form, category) }}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Other Posts in this Category</h3>
+                <ul class="list-unstyled">
+                    {% for p in all_posts %}
+                        {% if p.id != post.id %}
+                            <li>
+                                <a href="{{ url_for('show_post', category=category.replace(' ', '-'), post_id=p.id) }}">
+                                    {{ loop.index }}. {{ p.title }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Other Blog Categories</h3>
+                <div class="category-list">
+                    {% for category in categories %}
+                        <div class="category-item">
+                            <a href="{{ url_for('show_category', category=category.replace(' ', '-')) }}">{{ category }}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

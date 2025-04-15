@@ -1,0 +1,33 @@
+{% macro render_comment(comment, post, form, category) %}
+    <li>
+        <div class="commenterImage">
+            <img src="{{ comment.comment_author.email|gravatar }}" />
+        </div>
+        <div class="commentText">
+            <p>{{ comment.text|safe }}</p>
+            <span class="date sub-text">{{ comment.comment_author.name }}</span>
+
+            <!-- Reply Button -->
+            <button class="btn btn-link btn-sm reply-btn" onclick="toggleReplyForm({{ comment.id }})">Reply</button>
+
+            <!-- Reply Form -->
+            <form id="replyForm{{ comment.id }}" action="{{ url_for('show_post', category=category.replace(' ', '-'), post_id=post.id) }}" method="post" style="display: none;">
+                {{ form.hidden_tag() }}
+                <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                <div class="mb-3">
+                    {{ form.comment(class="form-control", placeholder="Write a reply...") }}
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">Post Reply</button>
+            </form>
+
+            <!-- Render nested comments recursively -->
+            {% if comment.replies %}
+                <ul class="nestedCommentList">
+                    {% for reply in comment.replies %}
+                        {{ render_comment(reply, post, form, category) }}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </li>
+{% endmacro %}

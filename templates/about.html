@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block content %}
+
+  <!-- Introduction Hero -->
+  <section class="container" id="content">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5 mx-5">
+      <div class="col-lg-6">
+        <div class="responsive-image-container d-block mx-auto">
+          <img src="{{ url_for('static', filename='img/about.jpg') }}" alt="my image for about page" class="responsive-image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <article class="mb-4">
+      <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+            <div>
+
+              <p class="lead-text block-text" id="call-to-action">About Al Hadar Mumuni</p>
+
+              <p class="paragraph">Welcome to my digital space – a home for ideas, stories, and reflections. I am Al-Hadar Mumuni, and this platform is where my passion for writing, academic exploration, public speaking, and human connection all converge.</p>
+
+              <p class="paragraph">Here, you'll find a blend of thoughtful blogs, scholarly articles, and reflections on academic conferences I've attended or plan to attend. This site also serves as a repository for my published work and ongoing research interests, especially in the areas of intercultural communication, migration, and social impact.</p>
+
+              <p class="paragraph">Beyond the academic, this is also a space for inspiration. I share moments that matter, spotlight events that shape my journey, and write with the hope of motivating others – especially young minds striving to find their voice and path in a complex world.</p>
+
+              <p class="paragraph">Whether you're a fellow researcher, a curious reader, a student, or someone simply seeking meaningful content, I’m glad you’re here. Let’s grow, question, and inspire TOGETHER.</p>
+
+              <p class="paragraph">Grab a snack, settle in, and enjoy your visit! You can also follow my adventures on social media: </p>
+
+              <!-- Social Media Icons Centered -->
+              <div class="d-flex justify-content-center align-items-center gap-3">
+                <a class="text-body-secondary" href="https://github.com/AlHadar93"><img class="github socials" src="/static/img/githubdark.svg" width="30" height="30" /></a>
+                <a class="text-body-secondary" href="YOUR LINKEDIN LINK"><img class="lin socials" src="/static/img/linkedindark.svg" width="30" height="30" /></a>
+                <a class="text-body-secondary" href="YOUR INSTAGRAM LINK"><img class="ins socials" src="/static/img/instagramdark.svg" width="30" height="30" /></a>
+                <a class="text-body-secondary" href="YOUR FACEBOOK LINK"><img class="fac socials" src="/static/img/facebookdark.svg" width="30" height="30" /></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Drafts{% endblock %}
+{% block content %}
+
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <h1>Your Drafts</h1>
+        <span class="subheading">Edit or publish your draft posts below.</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="mb-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+
+          <div class="mb-3">
+            <a href="{{ url_for('add_new_post') }}" class="btn btn-primary">Create New Draft</a>
+          </div>
+
+          {% if drafts %}
+            <ul class="list-group">
+              {% for draft in drafts %}
+                <li class="list-group-item">
+                  <a href="{{ url_for('edit_post', post_id=draft.id) }}">{{ draft.title }}</a>
+                  <span class="badge {{ 'bg-secondary' if draft.status == 'draft' else 'bg-success' }}">{{ draft.status }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <div class="alert alert-info">You have no draft posts. Create a new post to get started!</div>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+{% endblock %}

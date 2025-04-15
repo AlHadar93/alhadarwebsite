@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}Create Post{% endblock %}
+{% block content %}
+
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="page-heading">
+          {% if is_edit: %}
+          <h1>Edit Post</h1>
+          {% else: %}
+          <h1>New Post</h1>
+          {% endif %}
+          <span class="subheading"
+            >You're going to make a great blog post!</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+<main class="mb-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        {{ ckeditor.load() }} {{ ckeditor.config(name='body') }}
+        <form action="{{ url_for('edit_post', post_id=post.id) if is_edit else url_for('add_new_post') }}" method="post">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                <label for="{{ form.title.id }}" class="form-label">{{ form.title.label }}</label>
+                {{ form.title(class="form-control") }}
+                {% for error in form.title.errors %}
+                    <span class="error text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.img_url.id }}" class="form-label">{{ form.img_url.label }}</label>
+                {{ form.img_url(class="form-control") }}
+                {% for error in form.img_url.errors %}
+                    <span class="error text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.body.id }}" class="form-label">{{ form.body.label }}</label>
+                {{ form.body(class="form-control") }}
+                {% for error in form.body.errors %}
+                    <span class="error text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.category.id }}" class="form-label">{{ form.category.label }}</label>
+                {{ form.category(class="form-control") }}
+                {% for error in form.category.errors %}
+                    <span class="error text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <!-- Date Picker -->
+            <div class="mb-3">
+                <label for="{{ form.publish_date.id }}" class="form-label">{{ form.publish_date.label }}</label>
+                {{ form.publish_date(class="form-control") }}
+                {% for error in form.publish_date.errors %}
+                    <span class="error text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <!-- Time Picker -->
+            <div class="mb-3">
+                <label for="{{ form.publish_time.id }}" class="form-label">{{ form.publish_time.label }}</label>
+                {{ form.publish_time(class="form-control") }}
+                {% for error in form.publish_time.errors %}
+                    <span class="error text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between">
+                {{ form.draft(class="btn btn-primary mb-2 mb-md-0") }}
+                {% if post and post.status == 'published' %}
+                    <!-- If the post is published and being edited, show the "Update Post" button -->
+                    {{ form.update_post(class="btn btn-primary mb-2 mb-md-0") }}
+                {% else %}
+                    <!-- If the post is not published, show the "Publish" button -->
+                    {{ form.publish(class="btn btn-primary mb-2 mb-md-0") }}
+                {% endif %}
+                {{ form.schedule(class="btn btn-primary mb-2 mb-md-0") }}
+            </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

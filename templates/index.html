@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+  <!-- Introduction Hero -->
+  <section class="container" id="content">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5 mx-5">
+      <div class="col-10 col-sm-8 col-lg-6 mx-auto">
+        <div class="responsive-image-container d-block mx-auto">
+          <img src="{{ url_for('static', filename='img/index.jpg') }}" alt="Al Hadar Headshot" class="responsive-image">
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <h1 class="lead-text display-5 lh-1 mb-3" id="me">Al Hadar Mumuni</h1>
+        <h4>YOUR TITLE/EDUCATION HERE</h4>
+        <h5><i>HOBBIES/INTERESTS</i></h5>
+          <p>HOBBY 1</p>
+          <p>HOBBY 2</p>
+          <p>HOBBY 3</p>
+          <p>ADD MORE ASS NEEDED</p>
+        <p><a class="btn btn-outline-success" href="{{ url_for('about') }}"><em>Continue Reading...</em></a></p>
+       </div>
+      </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section>
+    <div class="container text-center">
+      <!-- Header Section -->
+      <div class="row flex-lg-row-reverse align-items-center g-5 py-5 mx-5">
+        <h3 class="lead-text" id="portfolio">Projects</h3>
+        <!-- Projects Section -->
+        <div class="col-lg-12">
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
+            <!-- First Project -->
+            <div class="col" id="first-project">
+              <img src="{{ url_for('static', filename='img/header.jpg') }}" class="responsive-image-index">
+              <h3 class="title">YOUR PORTFOLIO PROJECT TITLE</h3>
+              <p class="align-left">YOUR PORTFOLIO PROJECT DESCRIPTION</p>
+              <p><a class="btn btn-outline-success" href="Projects/post/23"><em>Read More...</em></a></p>
+            </div>
+
+            <!-- Second Project -->
+            <div class="col" id="second-project">
+              <img src="{{ url_for('static', filename='img/home-bg.jpg') }}" class="responsive-image-index">
+              <h3 class="title">YOUR PORTFOLIO PROJECT TITLE</h3>
+              <p class="align-left">YOUR PORTFOLIO PROJECT DESCRIPTION</p>
+              <p><a class="btn btn-outline-success" href="Projects/post/38"><em>Read More...</em></a></p>
+            </div>
+
+            <!-- Third Project -->
+            <div class="col" id="third-project">
+              <img src="{{ url_for('static', filename='img/header.jpg') }}" class="responsive-image-index">
+              <h3 class="title">YOUR PORTFOLIO PROJECT TITLE</h3>
+              <p class="align-left">YOUR PORTFOLIO PROJECT DESCRIPTION</p>
+              <p><a class="btn btn-outline-success" href="Projects/post/22"><em>Read More...</em></a></p>
+            </div>
+
+            <!-- Fourth Project -->
+            <div class="col" id="fourth-project">
+              <img src="{{ url_for('static', filename='img/home-bg.jpg') }}" class="responsive-image-index">
+              <h3 class="title">YOUR PORTFOLIO PROJECT TITLE</h3>
+              <p class="align-left">YOUR PORTFOLIO PROJECT DESCRIPTION</p>
+              <p><a class="btn btn-outline-success" href="Projects/post/32"><em>Read More...</em></a></p>
+            </div>
+            <p><a class="btn btn-outline-success" href="{{ url_for('projects') }}"><em>View More Projects...</em></a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!--  Blog Section-->
+  <section>
+    <div class="container text-center">
+      <!-- Header Section -->
+      <div class="row flex-lg-row-reverse align-items-center g-5 py-5 mx-5">
+        <h3 class="lead-text" id="blog">Blog</h3>
+        <!-- Align Recent Posts to Left -->
+        <div class="col-12 d-flex justify-content-start">
+            <p><a class="btn btn-outline-success" href="{{ url_for('blogs') }}" id="blog-text"><em>Recent Posts...</em></a></p>
+        </div>
+        <!-- Projects Section -->
+        <div class="col-lg-12">
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
+            <!-- First Project -->
+            <div class="col" id="python-blog">
+              <img src="{{ url_for('static', filename='img/header.jpg') }}" class="responsive-image-index">
+              <h3 class="title">YOUR PROJECT TITLE</h3>
+              <p class="align-left">YOUR PROJECT DESCRIPTION</p>
+              <p><a class="btn btn-outline-success" href="{{ url_for('projects') }}"><em>Read More...</em></a></p>
+            </div>
+
+            <!-- Second Project -->
+            <div class="col" id="ugescapades">
+              <img src="{{ url_for('static', filename='img/home-bg.jpg') }}" class="responsive-image-index">
+              <h3 class="title">YOUR PROJECT TITLE</h3>
+              <p class="align-left">YOUR PROJECT DESCRIPTION</p>
+              <p><a class="btn btn-outline-success" href="{{ url_for('ugescapades') }}"><em>Read More...</em></a></p>
+            </div>
+            <p><a class="btn btn-outline-success" href="{{ url_for('blogs') }}"><em>View All Blog Posts...</em></a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--contact form-->
+  <section class="container d-flex justify-content-center align-items-center">
+    <div class="my-5 col-md-6">
+      {% if get_flashed_messages() %}
+        <div class="alert alert-success">
+          {{ get_flashed_messages()[0] }}
+        </div>
+      {% endif %}
+      <h3 class="lead-text" id="call-to-action">Work with Your Name!</h3>
+      <p>
+        For collaborations, partnerships, freelance opportunities, feedback, suggestions, or any general enquiry, please fill the form below to send me a message:
+      </p>
+      <form action="/contact" method="post" id="contactForm" name="sentMessage">
+        <input type="text" name="honeypot" style="display:none;">
+        <div class="form-floating mb-3">
+          <input class="form-control" id="name" name="name" type="text" required>
+          <label for="name">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input class="form-control" id="email" name="email" type="email" required>
+          <label for="email">Email address</label>
+        </div>
+        <div class="form-floating mb-3">
+          <textarea class="form-control" id="message" name="message" required style="height: 12rem"></textarea>
+          <label for="message">Message</label>
+        </div>
+
+        <!-- hCaptcha widget -->
+        <div class="h-captcha" data-sitekey="HCAPTCHA SITE KEY HERE"></div>
+
+        <button class="btn btn-primary text-uppercase w-100" id="submitButton" type="submit">Send</button>
+      </form>
+    </div>
+  </section>
+  <!-- Google reCAPTCHA script -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+{% endblock %}

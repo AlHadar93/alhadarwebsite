@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Posts in {{ current_category }}{% endblock %}
+{% block content %}
+
+<header>
+    <h1>Posts in {{ current_category }}</h1>
+</header>
+
+<main>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                {% if posts %}
+                    <ul class="list-unstyled">
+                        {% for post in posts %}
+                            <li class="post-item mb-3">
+                                <h2>
+                                    <a href="{{ url_for('show_post', category=category.replace(' ', '-'), post_id=post.id) }}">{{ post.title }}</a>
+                                </h2>
+                                <p><small>Published on: {{ post.date }}</small></p>
+                                <p>{{ post.body[:150] }}...</p> <!-- Display a snippet of the post body -->
+                                <a href="{{ url_for('show_post', post_id=post.id) }}" class="btn btn-primary">Read More</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No posts available in this category.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Categories List -->
+<div class="container mt-5">
+    <h3>Other Categories</h3>
+    <div class="category-list">
+        {% for category in categories %}
+            <div class="category-item">
+                <a href="{{ url_for('show_category', category=category.replace(' ', '-')) }}" class="btn btn-link">{{ category }}</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

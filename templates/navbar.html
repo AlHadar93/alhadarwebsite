@@ -1,0 +1,88 @@
+<!-- Nav Bar -->
+<section class="nav-item">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary" id="mainNav">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('home') }}">
+        <img class="logo" src="{{ url_for('static', filename='img/home-bg.jpg') }}" height="60" alt="Ruth Selorme Logo">
+      </a>
+      <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="toggler-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('home') }}">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle px-lg-3 py-3 py-lg-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Portfolio
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ url_for('portfolio') }}">Navbar Item</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('projects') }}">Navbar Item</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{{ url_for('cvresume') }}">Navbar Item</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle px-lg-3 py-3 py-lg-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Blog
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ url_for('ugescapades') }}">Navbar Item</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('turkiyegecilmez') }}">Navbar Item</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('audacity') }}">Navbar Item</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('random_musings') }}">Navbar Item</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-lg-3 py-3 py-lg-4" href="#" data-bs-toggle="modal" data-bs-target="#emailModal">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('about') }}">About</a>
+          </li>
+          {% if not current_user.is_authenticated:%}
+          <li class="nav-item">
+            <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('login') }}">Login</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('register') }}">Register</a>
+          </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url_for('logout') }}">Log Out</a>
+            </li>
+          {% endif %}
+
+          {% if current_user.id == 1: %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle px-lg-3 py-3 py-lg-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Admin Console
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{url_for('add_new_post')}}">Create New Post</a></li>
+              <li><a class="dropdown-item" href="{{url_for('drafts')}}">Drafts</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('scheduled_posts') }}">Scheduled Posts</a></li>
+            </ul>
+          </li>
+          {% endif %}
+        </ul>
+
+        <!-- Dark Mode Toggle Button -->
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="darkModeToggle">
+          <label class="form-check-label" for="darkModeToggle">Dark Mode</label>
+        </div>
+        <form class="d-flex ms-auto" role="search" action="{{ url_for('search') }}" method="GET">
+          <input class="form-control me-2" type="search" name="q" placeholder="Type here" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</section>
