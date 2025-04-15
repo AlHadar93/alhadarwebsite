@@ -166,7 +166,7 @@ def favicon():
 @app.route('/sitemap.xml')
 def generate_sitemap():
     pages = ['/', '/about', '/contact', '/blog', '/new-page']  # Add more pages dynamically
-    base_url = "https://ruthselormeacolatse.info"
+    base_url = "https://alhadarwebsite.onrender.com/"
 
     xml_sitemap = """<?xml version="1.0" encoding="UTF-8"?>\n"""
     xml_sitemap += """<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n"""
