@@ -12,10 +12,10 @@ class SEOMiddleware:
 
         # Default SEO metadata
         g.seo = {
-            "title": "#YOUR SITE TITLE HERE",
-            "description": "YOUR SITE DESCRIPTION HERE",
-            "keywords": "YOUR SITE KEYWORKDS HERE",
-            "image": url_for('static', filename='img/YOURIMAGENAME.IMAGEEXTENSION', _external=True),
+            "title": "Al Hadar Mumuni",
+            "description": "Hi, I’m Al-Hadar Mumuni, a writer, researcher, and public speaker passionate about intercultural communication, migration, employee engagement and social impact. This site shares my blogs, academic work, conference journeys, and motivational stories. Join me as I explore ideas that inspire, inform, and connect!",
+            "keywords": "Communication, Intercultural, Research, Writer, Public Speaker",
+            "image": url_for('static', filename='img/metaimageog.jpg', _external=True),
             "url": request.base_url,
             "canonical": request.base_url  # Default to current URL (will override below if needed)
         }
@@ -39,9 +39,9 @@ class SEOMiddleware:
                                                      post_id=post.id))
 
         elif request.endpoint == "about":
-            g.seo["title"] = "YOUR ABOUT TITLE HERE"
-            g.seo["description"] = "YOUR DESCRIPTION HERE."
+            g.seo["title"] = "About - Al Hadar Mumuni"
+            g.seo["description"] = "Learn more about Al Hadar Mumuni."
 
         elif request.endpoint == "contact":
-            g.seo["title"] = "YOUR CONTACT TITLE HERE"
-            g.seo["description"] = "YOUR CONTACT DESCRIPTION HERE."
+            g.seo["title"] = "Contact - Al Hadar Mumuni"
+            g.seo["description"] = "Get in touch with Al Hadar Mumuni."
